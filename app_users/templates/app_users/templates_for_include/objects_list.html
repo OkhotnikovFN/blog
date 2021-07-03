@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="objects-container flex">
+    {% for user in users %}
+            <div class="objects-container__object flex">
+                {% url 'app_blog:user_blog_entries' pk=user.pk slug=user.slug as user_blog_entries_url%}
+                <a class="update-link objects-container__object-title" href="{{ user_blog_entries_url }}" aria-label="Посты блогера {{ user.username }}" title="Посты блогера {{ user.username }}">
+                    <p> {{ user.username }} </p>
+                </a>
+                <a href="{{ user_blog_entries_url }}" aria-label="Посты блогера {{ user.username }}" title="Посты блогера {{ user.username }}">
+                    <div class="round-wrap round-wrap_full-size">
+                        {% if user.user_photo %}
+                            <img class="objects-container__object-photo" src="{{ user.user_photo.url }}" alt="Фото профиля">
+                        {% else %}
+                            <img class="objects-container__object-photo" src="{% static 'project_modules/images/anonymous-photo.jpg' %}" alt="Фото профиля">
+                        {% endif %}
+                    </div>
+                </a>
+            </div>
+    {% endfor %}
+</div>

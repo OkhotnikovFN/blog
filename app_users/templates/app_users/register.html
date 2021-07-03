@@ -1,0 +1,23 @@
+{% extends 'project_modules/base.html' %}
+
+{% load static %}
+{% block title %}
+    Регистрация на сайте
+{%  endblock %}
+
+{% block head %}
+    <script src="{% static 'project_modules/js/phone_input.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="title-container flex">
+        <h2 class="title-container__label">Регистрация</h2>
+    </div>
+
+    <form method="post" action="{% url 'app_users:register' %}">
+        {% include 'app_users/templates_for_include/login_register_form.html' %}
+    <button class="update-button" type="submit"> Регистрация </button>
+    </form>
+
+{% endblock %}

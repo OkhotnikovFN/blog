@@ -1,0 +1,16 @@
+{% extends 'project_modules/base.html' %}
+
+{% block title %}
+    Вход на сайт
+{%  endblock %}
+
+{% block content %}
+    <div class="title-container flex">
+        <h2 class="title-container__label">Вход на сайт</h2>
+    </div>
+    <form method="post" action="{% url 'app_users:login' %}">
+        {% include 'app_users/templates_for_include/login_register_form.html' %}
+    <button class="update-button" type="submit"> Войти </button>
+    </form>
+
+{% endblock %}

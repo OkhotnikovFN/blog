@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <title>
+
+        {% block title %}
+            Блог
+        {%  endblock %}
+
+    </title>
+
+    {% block head %}
+
+    {% endblock %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'project_modules/css/styles.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'project_modules/images/logo.png' %}"/>
+</head>
+<body>
+    <header class="header">
+        <div class="dark-bar">
+            <div class="container">
+                <nav class="nav flex">
+                    <a class="header__link" href="{% url 'main_view' %}" aria-label="Главная страница" title="Главная страница">
+                        <div class="round-wrap round-wrap_icon">
+                            <img class="header__logo" src="{% static 'project_modules/images/logo.png' %}" alt="Логотип">
+                        </div>
+                    </a>
+                    <a class="header__link update-link" href="{% url 'app_users:register' %}" aria-label="Регистрация" title="Регистрация">
+                        Регистрация
+                    </a>
+                    <input name="username" class="header__search" placeholder="поиск по блогерам" aria-label="Поиск по блогерам" title="Поиск по блогерам">
+
+                    {% if request.user.is_authenticated %}
+                        <a class="header__link update-link" href="{% url 'app_blog:blog_create' %}" aria-label="Создать запись" title="Создать запись">
+                            Создать запись
+                        </a>
+                    {% endif %}
+
+                    {% if request.user.is_authenticated %}
+                        <a class="header__link" href="{% url 'app_users:personal_account'  slug=request.user.slug pk=request.user.pk %}" aria-label="Профиль" title="Профиль">
+                    {% else %}
+                        <a class="header__link" href="{% url 'app_users:login' %}" aria-label="Войти на сайт" title="Войти на сайт">
+                    {% endif %}
+                            <div class="round-wrap round-wrap_icon">
+                                {% if request.user.is_authenticated and request.user.user_photo %}
+                                    <img class="header__profile-photo" src="{{ request.user.user_photo.url }}" alt="Фото профиля">
+                                {% else %}
+                                    <img class="header__profile-photo" src="{% static 'project_modules/images/anonymous-photo.jpg' %}" alt="Фото профиля">
+                                {% endif %}
+                            </div>
+                        </a>
+
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <script type="module">
+        import {addCommonFilters} from '{% static 'project_modules/js/change_query_string.js' %}';
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Установка фильтров для отображаемых пользователей.
+            addCommonFilters('users', ['username'], '{% url 'app_users:user_list' %}')
+        });
+    </script>
+
+    <main>
+        <div class="container main_container">
+
+            {% block content %}
+
+
+            {% endblock %}
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="reverse-dark-bar">
+            <div class="container">
+                <nav class="nav flex">
+                    <a class="footer__link" href="{% url 'main_view' %}" aria-label="Главная страница" title="Главная страница">
+                        <div class="round-wrap round-wrap_icon">
+                            <img class="header__logo" src="{% static 'project_modules/images/logo.png' %}" alt="Логотип">
+                        </div>
+                    </a>
+                    <a class="footer__link" target="_blank" href="https://vk.com/okhotnikov.fedor" aria-label="Ссылка на VK" title="Ссылка на VK">
+                        <div class="round-wrap round-wrap_icon">
+                            <img class="header__logo" src="{% static 'project_modules/images/vk_logo.png' %}" alt="VK">
+                        </div>
+                    </a>
+                    <a class="footer__link" target="_blank" href="https://www.instagram.com/okhotnikov.fedor/" aria-label="Ссылка на Instagram" title="Ссылка на Instagram">
+                        <div class="round-wrap round-wrap_icon">
+                            <img class="header__logo" src="{% static 'project_modules/images/instagram_logo.png' %}" alt="Instagram">
+                        </div>
+                    </a>
+                    <a class="footer__link" target="_blank" href="https://github.com/OkhotnikovFN" aria-label="Ссылка на GitHub" title="Ссылка на GitHub">
+                        <div class="round-wrap round-wrap_icon">
+                            <img class="header__logo" src="{% static 'project_modules/images/git_hub_logo.png' %}" alt="GitHub">
+                        </div>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

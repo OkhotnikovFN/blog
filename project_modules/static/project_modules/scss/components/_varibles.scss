@@ -1,0 +1,13 @@
+$color-dark: #03052d;
+$color-opacity-dark: rgba(3, 5, 45, 0.1);
+$color-dark-blue: #29336b;
+$color-blue: #91b8ed;
+$color-light-blue: #b9fbee;
+$color-pink: #d79a89;
+$color-white: #ffffff;
+$color-red: #ff0800;
+
+$blue-gradient: linear-gradient(to right, $color-dark, $color-dark-blue, $color-blue);
+$dark-blue-gradient: linear-gradient(to right, $color-dark, $color-dark-blue);
+$reverse-blue-gradient: linear-gradient(to left, $color-dark, $color-dark-blue, $color-blue);
+$reverse-dark-blue-gradient: linear-gradient(to left, $color-dark, $color-dark-blue);

@@ -1,0 +1,105 @@
+{% extends 'project_modules/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Детальная информация о записи
+{%  endblock %}
+
+{% block head %}
+    <script src="{% static 'project_modules/js/images_carousel.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="title-container flex">
+        <h2 class="title-container__label">Детальная информация о записи блога</h2>
+    </div>
+    <div class="title-container flex">
+        <h2 class="title-container__label title-container__label_small-font">Содержание</h2>
+    </div>
+    <div class="title-container flex">
+        {% if request.user == blog.author %}
+            <a class="update-link" href="{% url 'app_blog:blog_update' pk=blog.pk %}" aria-label="Редактировать запись" title="Редактировать запись">
+                Редактировать запись
+            </a>
+        {% endif %}
+        <a class="update-link" href="{% url 'app_blog:user_blog_entries'  slug=blog.author.slug pk=blog.author.pk %}" aria-label="Все запсии пользователя {{ blog.author.username }}" title="Все запсии пользователя {{ blog.author.username }}">
+            Все записи пользователя
+        </a>
+    </div>
+    <div class="blog-content__box flex">
+        <div class="blog-content blog-content__text">{{ blog.text }}</div>
+        <div class="blog-content blog-content__status">
+            {% if blog.published_at %}
+                {{ blog.published_at|date:'d E Yг. H:i' }}
+            {% else %}
+                Запись еще не опубликована
+            {% endif %}
+        </div>
+    </div>
+
+    {% if blog.all_images %}
+        <div class="title-container flex">
+            <h2 class="title-container__label title-container__label_small-font">Изображения</h2>
+        </div>
+        <div class="blog-images">
+            {% for image in blog.all_images %}
+                <div class="blog-images__item">
+                    <a class="blog-images__link" href="{{ image.image.url }}" target="_blank" aria-label="Изображение блога" title="Изображение блога">
+                        <img class="blog-images__image" src="{{ image.image.url }}" alt="Изображение блога" >
+                    </a>
+                </div>
+            {% endfor %}
+            <span class="blog-images__button blog-images__button_prev"></span>
+            <span class="blog-images__button blog-images__button_next"></span>
+        </div>
+    {% endif %}
+
+    <div class="title-container flex">
+        <h2 class="title-container__label title-container__label_small-font">Комментарии</h2>
+    </div>
+    <ul class="blog-comments">
+        {% for comment in blog.all_comments %}
+            <li class="blog-comments__item">
+                <div class="blog-comments__content">
+                    <div class="blog-comments__comment">
+                        <div class="round-wrap round-wrap_icon">
+                            {% if comment.user %}
+                                <img class="header__profile-photo" src="{{ comment.user.user_photo.url }}" alt="Фото профиля">
+                            {% else %}
+                                <img class="header__profile-photo" src="{% static 'project_modules/images/anonymous-photo.jpg' %}" alt="Фото профиля">
+                            {% endif %}
+                        </div>
+                        <p class="blog-comments__author-name">{{ comment }}</p>
+                    </div>
+{##}
+                    <p class="blog-comments__comment blog-comments__comment_text">{{ comment.text }}</p>
+                    <p class="blog-comments__comment blog-comments__comment_date">Дата публикации: {{ comment.created_at }}</p>
+                </div>
+            </li>
+        {% empty %}
+            <div class="comment-content">
+                <p class="comment-content__item">Комментариев пока что нету, вы можете стать первым</p>
+            </div>
+        {% endfor %}
+    </ul>
+
+
+    <div class="title-container flex">
+        <h2 class="title-container__label title-container__label_small-font">Добавить комментарий</h2>
+    </div>
+    <form method="post" action="{% url 'app_blog:blog_detail' pk=blog.pk %}">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        {% include 'project_modules/templates_for_include/scroling_to_field_with_errors.html' with label_id=form.text.id_for_label %}
+
+        <p>
+            {{ form.text.errors }}
+            {{ form.text }}
+        </p>
+
+        <button class="update-button" type="submit" aria-label="Опубликовать комментарий" title="Опубликовать комментарий">Опубликовать комментарий</button>
+    </form>
+
+{% endblock %}

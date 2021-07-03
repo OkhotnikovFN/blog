@@ -1,0 +1,27 @@
+{% extends 'project_modules/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Создать запись
+{%  endblock %}
+
+{% block head %}
+    <script src="{% static 'project_modules/js/image_preview.js' %}"></script>
+{%  endblock %}
+
+{% block content %}
+    <div class="title-container flex">
+        <h2 class="title-container__label">Создать блог</h2>
+    </div>
+
+    <div class="flex title-container">
+        <a class="update-link " href="{% url 'app_blog:blog_create_from_file' %}" aria-label="Создать записи из файла" title="Создать записи из файла">
+            Создать записи блога из файла
+        </a>
+    </div>
+
+    {% url 'app_blog:blog_create' as create_url%}
+    {% include 'app_blog/templates_for_include/create_update_blog_form.html' with button_name='Создать' url=create_url %}
+
+{% endblock %}

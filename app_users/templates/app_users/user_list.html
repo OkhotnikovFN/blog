@@ -1,0 +1,30 @@
+{% extends 'project_modules/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Все блогеры
+{%  endblock %}
+
+{% block head %}
+    <script type="module" src="{% static 'project_modules/js/set_paginator_links.js' %}"></script>
+{%  endblock %}
+
+
+{% block content %}
+
+    {% include 'project_modules/templates_for_include/paginate_filter.html' with filter_name='users_per_page' object_name='блогеров'%}
+
+    {% if users %}
+        {% include 'project_modules/templates_for_include/object_paginator_links_list.html' %}
+
+        {% include 'app_users/templates_for_include/objects_list.html' %}
+
+        {% include 'project_modules/templates_for_include/object_paginator_links_list.html' %}
+    {% else %}
+        <div class="title-container flex">
+            <h2 class="title-container__label">Нет блогеров удовлетворяющих вашему запросу</h2>
+        </div>
+    {% endif %}
+
+{% endblock %}

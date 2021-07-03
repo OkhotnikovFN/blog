@@ -1,0 +1,39 @@
+{% load app_users_templatetags %}
+
+{% if page_obj.has_other_pages %}
+    <div class="paginate-objects flex">
+        <div class="paginate-objects__container flex">
+            {% with visible_pages=2 %}
+                {% for p in paginator.page_range %}
+                    {% if page_obj.number == p %}
+                        <span class="paginate-objects__link paginate-objects__link_visible_page">{{ p }}</span>
+                    {% elif p >= page_obj.number|subtract:visible_pages and p <= page_obj.number|add:visible_pages  %}
+                        {% include 'project_modules/templates_for_include/single_link_in_objects_paginator.html' with p=p text=p%}
+                    {% elif p == 1 %}
+                        {% include 'project_modules/templates_for_include/single_link_in_objects_paginator.html' with p=p text=p%}
+                        {% if page_obj.number > visible_pages|add:2 %}
+                            <span class="paginate-objects__link">
+                                ...
+                            </span>
+                        {% endif %}
+                    {% elif p == paginator.num_pages %}
+                        {% if page_obj.number < paginator.num_pages|subtract:visible_pages|subtract:1 %}
+                            <span class="paginate-objects__link">
+                                ...
+                            </span>
+                        {% endif %}
+                        {% include 'project_modules/templates_for_include/single_link_in_objects_paginator.html' with p=p text=p%}
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+        </div>
+        <div class="paginate-objects__container flex">
+            {% if page_obj.has_previous %}
+                {% include 'project_modules/templates_for_include/single_link_in_objects_paginator.html' with p=page_obj.previous_page_number text='Предыдущая'%}
+            {% endif %}
+            {% if page_obj.has_next %}
+                {% include 'project_modules/templates_for_include/single_link_in_objects_paginator.html' with p=page_obj.next_page_number text='Следующая'%}
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

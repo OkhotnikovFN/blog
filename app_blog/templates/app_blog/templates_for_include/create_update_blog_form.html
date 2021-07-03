@@ -1,0 +1,14 @@
+<form method="post" enctype="multipart/form-data" action="{{ url }}">
+    <div class="create-blog-form flex">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="create-blog-form__box flex">
+                {{ field.errors }}
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button class="update-button" type="submit"> {{ button_name }} </button>
+    </div>
+</form>

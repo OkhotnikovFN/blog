@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, input, textarea {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: $color-opacity-dark;
+}
+
+input, textarea {
+    text-align: center;
+    border-radius: 5px;
+    border: 2px outset $color-pink;
+    &:focus {
+        border-style: inset;
+        border-color: $color-blue;
+    }
+    &:hover {
+        border-style: inset;
+    }
+    &:focus-visible {
+        outline: none;
+    }
+}
+
+a, button {
+    cursor: pointer;
+}
+
+.container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.update-link, .update-button {
+    margin: 10px;
+    padding: 4px;
+    border: 2px outset $color-pink;
+    border-radius: 5px;
+    background: $dark-blue-gradient;
+    color: $color-light-blue;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+        border-style: inset;
+        background: $reverse-dark-blue-gradient;
+    }
+}
+
+.update-button {
+    font-size: 18px;
+}
+
+.transparent-button {
+    background: none;
+    border: none;
+}
+
+.nav {
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    color: $color-light-blue;
+    font-size: 18px;
+}
+
+.round-wrap {
+    border: 2px outset $color-pink;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    background: $dark-blue-gradient;
+    &:hover {
+        border-style: inset;
+        background: $reverse-dark-blue-gradient;
+    }
+    &_icon {
+        width: 50px;
+        height: 50px;
+        padding: 2px;
+    }
+    &_full-size {
+        width: 200px;
+        height: 200px;
+        padding: 3px;
+        overflow: hidden;
+    }
+    &_blog-image {
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+}
+
+.paginate-objects {
+    flex-direction: column;
+    margin: 10px;
+    &__container {
+        margin: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+    &__link {
+        &:not(:first-child){
+            margin-left: 10px;
+        }
+        &_visible_page {
+            font-weight: 700;
+            font-size: 20px;
+        }
+    }
+}
+
+/*Django-styles*/
+/*Поля с ошибками*/
+.invalid_field {
+    border-color: $color-red;
+    &::placeholder {
+     color: $color-red;
+    }
+}
+
+.errorlist {
+    text-align: justify;
+    margin: 0 auto;
+    padding: 0;
+    color: $color-red;
+    font-size: 12px;
+    max-width: 300px;
+}

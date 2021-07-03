@@ -1,0 +1,83 @@
+{% extends 'project_modules/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Личный кабинет
+{%  endblock %}
+
+{% block head %}
+    <script src="{% static 'project_modules/js/user_photo_preview.js' %}"></script>
+    <script src="{% static 'project_modules/js/phone_input.js' %}"></script>
+{%  endblock %}
+
+
+{% block content %}
+    <div class="title-container flex">
+        <h2 class="title-container__label">Личный кабинет</h2>
+    </div>
+
+    {% if pass_successfully_changed %}
+        <div class="title-container flex">
+            <h2 class="title-container__label">Пароль успешно изменен</h2>
+        </div>
+    {% endif %}
+
+    <div class="flex title-container">
+        <a class="update-link " href="{% url 'app_users:change_password' %}" aria-label="Поменять пароль" title="Поменять пароль">
+            Поменять пароль
+        </a>
+        <a class="update-link" href="{% url 'app_users:logout' %}" aria-label="Покинуть сайт" title="Покинуть сайт">
+            Покинуть сайт
+        </a>
+        <a class="update-link" href="{% url 'app_blog:user_blog_entries' pk=customuser.pk slug=customuser.slug %}" aria-label="Посты блогера {{ customuser.username }}" title="Посты блогера {{ customuser.username }}">
+            Мои записи
+        </a>
+    </div>
+
+    <div class="user-settings-container flex">
+        <div class="login-register-update flex">
+            <form method="post" enctype="multipart/form-data" action="{% url 'app_users:personal_account' pk=customuser.pk slug=customuser.slug %}">
+                {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% include 'app_users/templates_for_include/update_form_field.html' with label_tag=form.username.label_tag object_value=customuser.username form_widget=form.username %}
+                    {% include 'app_users/templates_for_include/update_form_field.html' with label_tag=form.email.label_tag object_value=customuser.email form_widget=form.email %}
+                    {% include 'app_users/templates_for_include/update_form_field.html' with label_tag=form.telephone_number.label_tag object_value=customuser.telephone_number form_widget=form.telephone_number %}
+                    {% include 'app_users/templates_for_include/update_form_field.html' with label_tag=form.first_name.label_tag object_value=customuser.first_name form_widget=form.first_name %}
+                    {% include 'app_users/templates_for_include/update_form_field.html' with label_tag=form.last_name.label_tag object_value=customuser.last_name form_widget=form.last_name %}
+                    <div class="login-register-update__box flex">
+                        <div class="login-register-update__label flex">{{ form.user_photo.label_tag }}</div>
+                        <div class="login-register-update__form-value flex">{{ form.user_photo }}</div>
+                    </div>
+                <button class="update-button" type="submit"> Обновить </button>
+            </form>
+        </div>
+
+        <div class="update-user-photo-container flex">
+            {% if customuser.user_photo %}
+                {% include 'app_users/templates_for_include/custom_user_photo_link.html' with photo_url=customuser.user_photo.url %}
+            {% else %}
+                {% static 'project_modules/images/anonymous-photo.jpg' as anonim_photo_url %}
+                {% include 'app_users/templates_for_include/custom_user_photo_link.html' with photo_url=anonim_photo_url %}
+            {% endif %}
+        </div>
+    </div>
+
+    <form method="post" action="{% url 'app_users:delete' pk=customuser.pk slug=customuser.slug %}">
+        {% csrf_token %}
+        <button class="update-button" type="submit"> Удалить свою страницу </button>
+    </form>
+
+    <script type="module">
+        import {setMaxWidth} from '{% static 'project_modules/js/set_max_width_to_elements.js' %}';
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let form_labels = document.querySelectorAll('.login-register-update__label'),
+                fields_values = document.querySelectorAll('.login-register-update__field-value');
+
+            setMaxWidth(form_labels)
+            setMaxWidth(fields_values)
+        })
+    </script>
+
+{% endblock %}
