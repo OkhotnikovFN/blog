@@ -10,7 +10,7 @@ class CustomPaginateListView(generic.ListView):
     """
     Базовое представление c кастомной пагинацией.
     """
-    paginate_by = 10
+    paginate_by = 12
     paginate_cookie_name = 'objects_per_page'
 
     def get_paginate_by(self, queryset):

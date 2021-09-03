@@ -1,8 +1,4 @@
-import csv
-import datetime
-
 from django import forms
-from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 
 from app_blog import models, widgets
@@ -66,7 +62,7 @@ class BlogCommentForm(forms.ModelForm, ChangeIsValidFormMixin):
         exclude = ['user', 'blog']
         widgets = {
             'text': forms.Textarea(attrs={
-                'class': 'create-blog-form__field',
+                'class': FORM_CLASS_NAME,
                 'placeholder': 'Введите комментарий',
                 'aria-label': 'Введите комментарий',
             }),

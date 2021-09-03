@@ -5,6 +5,7 @@ from typing import List
 from django.core.exceptions import ValidationError
 from django.forms import FileField
 from django.http import HttpRequest
+from django.utils.timezone import localtime
 
 from app_blog import models, forms
 from app_blog.forms import BlogCommentForm, BlogEntriesFileForm
@@ -67,7 +68,7 @@ def check_csv_blog_file(form_data: FileField.clean) -> List:
 
     for csv_row in data_list:
         try:
-            csv_row[1] = datetime.datetime.strptime(csv_row[1], '%Y-%m-%dT%H:%M')
+            csv_row[1] = localtime(datetime.datetime.strptime(csv_row[1], '%Y-%m-%dT%H:%M%z'))
         except ValueError:
             raise ValidationError("Неверный формат даты в файле")
 

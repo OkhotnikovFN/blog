@@ -12,6 +12,7 @@ class CreateBlogView(LoginRequiredMixin, generic.CreateView):
     """Представление создания записи блога"""
     template_name = 'app_blog/create_blog.html'
     form_class = forms.BlogForm
+    login_url = reverse_lazy('app_users:login')
 
     def form_valid(self, form):
         self.object = services.create_update_blog(form, self.request)
@@ -29,6 +30,7 @@ class BlogDetailView(UserPassesTestMixin, generic.DetailView, generic.FormView):
                  to_attr='all_comments'),
     )
     form_class = forms.BlogCommentForm
+    raise_exception = True
 
     def test_func(self):
         blog = self.get_object()
@@ -67,6 +69,7 @@ class BlogDeleteView(UserPassesTestMixin, generic.DeleteView):
     """Удаление записи блога"""
     model = models.Blog
     success_url = reverse_lazy('main_view')
+    raise_exception = True
 
     def test_func(self):
         blog = self.get_object()
@@ -79,6 +82,7 @@ class BlogDeleteView(UserPassesTestMixin, generic.DeleteView):
 class DeleteBlogImageView(UserPassesTestMixin, generic.DeleteView):
     """Удаление изображения, привязанного к блогу"""
     queryset = models.BlogImage.objects.select_related().all()
+    raise_exception = True
 
     def test_func(self):
         image = self.get_object()
@@ -92,7 +96,7 @@ class DeleteBlogImageView(UserPassesTestMixin, generic.DeleteView):
 
 
 class UserBlogListView(CustomPaginateListView):
-    """Список все записей блога, конктретного пользователя"""
+    """Список всех записей блога, конкретного пользователя"""
     template_name = 'app_blog/user_blog_list.html'
     context_object_name = 'blog_entries'
     paginate_cookie_name = 'blog_entries_per_page'

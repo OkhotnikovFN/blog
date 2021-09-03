@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django.urls import reverse_lazy
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR_OLD = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -132,3 +134,4 @@ AUTHENTICATION_BACKENDS = (
 
 # Auth settings
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = reverse_lazy('app_users:login')
