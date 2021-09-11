@@ -585,4 +585,14 @@ a, button {
   padding: 15px;
 }
 
+.localization-wrap__label {
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.localization-wrap__select {
+  margin: 4px;
+}
+
 /*# sourceMappingURL=styles.css.map */

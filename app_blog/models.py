@@ -1,22 +1,23 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from app_users.models import CustomUser
 
 
 class Blog(models.Model):
     """Модель блога"""
-    text = models.TextField('Текст блога')
-    created_at = models.DateTimeField('Дата создания', auto_now_add=True)
+    text = models.TextField(_('Blog text'))
+    created_at = models.DateTimeField(_('Created date'), auto_now_add=True)
     author = models.ForeignKey(CustomUser,
                                on_delete=models.CASCADE,
-                               verbose_name='Автор',
+                               verbose_name=_('Author'),
                                related_name='blog', )
-    published_at = models.DateTimeField('Дата публикации', null=True, blank=True)
+    published_at = models.DateTimeField(_('Published date'), null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Блог'
-        verbose_name_plural = 'Блоги'
+        verbose_name = _('Blog')
+        verbose_name_plural = _('Blogs')
         ordering = ['-created_at']
 
     def get_absolute_url(self):
@@ -37,15 +38,15 @@ class Blog(models.Model):
 
 class BlogImage(models.Model):
     """Модель изображения для блога"""
-    image = models.ImageField('Фото блога', upload_to='blogs/images/',)
+    image = models.ImageField(_('Blog image'), upload_to='blogs/images/',)
     blog = models.ForeignKey(Blog,
                              on_delete=models.CASCADE,
-                             verbose_name='Изображение блога',
+                             verbose_name=_('Blog Entry'),
                              related_name='images', )
 
     class Meta:
-        verbose_name = 'Изображение блога'
-        verbose_name_plural = 'Изображения блога'
+        verbose_name = _('Blog image')
+        verbose_name_plural = _('Blog images')
 
     def __str__(self):
         return f'{self.image.name}'
@@ -57,21 +58,21 @@ class BlogComment(models.Model):
     """
     user = models.ForeignKey(CustomUser,
                              on_delete=models.SET_NULL,
-                             verbose_name='Пользователь',
+                             verbose_name=_('User'),
                              related_name='comments',
                              blank=True,
                              null=True, )
 
-    text = models.TextField('Комментарий')
+    text = models.TextField(_('Comment'))
     blog = models.ForeignKey(Blog,
                              on_delete=models.CASCADE,
-                             verbose_name='Запись блога',
+                             verbose_name=_('Blog Entry'),
                              related_name='comments', )
-    created_at = models.DateTimeField('Дата создания', auto_now_add=True, db_index=True)
+    created_at = models.DateTimeField(_('Created date'), auto_now_add=True, db_index=True)
 
     class Meta:
-        verbose_name = 'Комментарий'
-        verbose_name_plural = 'Комментарии'
+        verbose_name = _('Comment')
+        verbose_name_plural = _('Comments')
 
     @property
     def display_text(self):

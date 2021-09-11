@@ -43,7 +43,7 @@ class CustomUserModelTest(TestCase):
         """
         user = User.objects.get(id=1)
         field_label = user._meta.get_field('user_photo').verbose_name
-        self.assertEquals(field_label, 'Фото профиля')
+        self.assertEquals(field_label, _('profile photo'))
 
     def test_slug_field_label(self):
         """

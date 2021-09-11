@@ -1,8 +1,10 @@
 {% extends 'project_modules/base.html' %}
+{% load i18n %}
 
 {% load static %}
 {% block title %}
-    Регистрация на сайте
+    {% trans "Registration" as registratin_trans%}
+    {{ registratin_trans }}
 {%  endblock %}
 
 {% block head %}
@@ -12,12 +14,12 @@
 
 {% block content %}
     <div class="title-container flex">
-        <h2 class="title-container__label">Регистрация</h2>
+        <h2 class="title-container__label">{{ registratin_trans }}</h2>
     </div>
 
     <form method="post" action="{% url 'app_users:register' %}">
         {% include 'app_users/templates_for_include/login_register_form.html' %}
-    <button class="update-button" type="submit"> Регистрация </button>
+    <button class="update-button" type="submit">{{ registratin_trans }}</button>
     </form>
 
 {% endblock %}

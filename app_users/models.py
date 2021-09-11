@@ -5,12 +5,14 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CustomUser(AbstractUser):
-    """Расширенная модель пользоватлея"""
+    """
+    Расширенная модель пользователя
+    """
     email = models.EmailField(_('email address'), unique=True)
     telephone_number = models.CharField(_('telephone number'),
                                         max_length=20,
                                         unique=True, )
-    user_photo = models.ImageField('Фото профиля', upload_to='users/photos/', blank=True, null=True)
+    user_photo = models.ImageField(_('profile photo'), upload_to='users/photos/', blank=True, null=True)
     slug = models.SlugField('slug-url')
 
     def get_absolute_url(self):

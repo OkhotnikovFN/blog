@@ -1,0 +1,451 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-11 12:35+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\app_blog\apps.py:7
+msgid "blog"
+msgstr "блог"
+
+#: .\app_blog\forms.py:10 .\app_blog\forms.py:12
+msgid "Enter blog text"
+msgstr "Введите текст блога"
+
+#: .\app_blog\forms.py:11 .\app_blog\models.py:10
+#: .\app_blog\tests\test_models.py:44
+msgid "Blog text"
+msgstr "Текст блога"
+
+#: .\app_blog\forms.py:15
+msgid "Enter published date"
+msgstr "Введите дату публикации"
+
+#: .\app_blog\forms.py:16 .\app_blog\forms.py:17 .\app_blog\models.py:16
+#: .\app_blog\templates\app_blog\blog_detail.html:82
+#: .\app_blog\tests\test_models.py:68
+msgid "Published date"
+msgstr "Дата публикации"
+
+#: .\app_blog\forms.py:20 .\app_blog\forms.py:21 .\app_blog\forms.py:22
+msgid "Select Images"
+msgstr "Выберите изображения"
+
+#: .\app_blog\forms.py:33 .\app_blog\templates\app_blog\blog_detail.html:46
+msgid "Images"
+msgstr "Изображения"
+
+#: .\app_blog\forms.py:67 .\app_blog\forms.py:68
+msgid "Enter a comment"
+msgstr "Введите комментарий"
+
+#: .\app_blog\forms.py:75 .\app_blog\tests\test_forms.py:85
+msgid "CSV file"
+msgstr "CSV файл"
+
+#: .\app_blog\models.py:11 .\app_blog\models.py:71
+#: .\app_blog\tests\test_models.py:52
+msgid "Created date"
+msgstr "Дата создания"
+
+#: .\app_blog\models.py:14 .\app_blog\tests\test_models.py:60
+msgid "Author"
+msgstr "Автор"
+
+#: .\app_blog\models.py:19
+#: .\project_modules\templates\project_modules\base.html:11
+msgid "Blog"
+msgstr "Блог"
+
+#: .\app_blog\models.py:20
+msgid "Blogs"
+msgstr "Блоги"
+
+#: .\app_blog\models.py:41 .\app_blog\models.py:48
+#: .\app_blog\templates\app_blog\blog_detail.html:51
+#: .\app_blog\templates\app_blog\update_blog.html:33
+#: .\app_blog\templates\app_blog\user_blog_list.html:33
+#: .\app_blog\tests\test_models.py:128
+msgid "Blog image"
+msgstr "Изображение блога"
+
+#: .\app_blog\models.py:44 .\app_blog\models.py:69
+#: .\app_blog\templates\app_blog\user_blog_list.html:28
+#: .\app_blog\tests\test_models.py:136 .\app_blog\tests\test_models.py:198
+msgid "Blog Entry"
+msgstr "Запись блога"
+
+#: .\app_blog\models.py:49
+msgid "Blog images"
+msgstr "Изображения блога"
+
+#: .\app_blog\models.py:61 .\app_blog\tests\test_models.py:182
+msgid "User"
+msgstr "Пользователь"
+
+#: .\app_blog\models.py:66 .\app_blog\models.py:74
+#: .\app_blog\tests\test_models.py:190
+msgid "Comment"
+msgstr "Комментарий"
+
+#: .\app_blog\models.py:75 .\app_blog\templates\app_blog\blog_detail.html:63
+msgid "Comments"
+msgstr "Комментарии"
+
+#: .\app_blog\services.py:65
+msgid "Invalid file encoding"
+msgstr "Неверная кодировка файла"
+
+#: .\app_blog\services.py:74 .\app_blog\tests\test_views.py:614
+msgid "Invalid date format in the file"
+msgstr "Неверный формат даты в файле"
+
+#: .\app_blog\templates\app_blog\blog_detail.html:7
+#: .\app_blog\templates\app_blog\blog_detail.html:16
+#: .\app_blog\templates\app_blog\user_blog_list.html:7
+msgid "Detailed information about the record"
+msgstr "Детальная информация о записи"
+
+#: .\app_blog\templates\app_blog\blog_detail.html:19
+msgid "Content"
+msgstr "Содержание"
+
+#: .\app_blog\templates\app_blog\blog_detail.html:23
+msgid "Edit an entry"
+msgstr "Редактировать запись"
+
+#: .\app_blog\templates\app_blog\blog_detail.html:28
+msgid "All user entries"
+msgstr "Все записи пользователя"
+
+#: .\app_blog\templates\app_blog\blog_detail.html:39
+msgid "The entry has not been published yet"
+msgstr "Запись еще не опубликована"
+
+#: .\app_blog\templates\app_blog\blog_detail.html:72
+#: .\app_users\templates\app_users\templates_for_include\custom_user_photo_link.html:5
+#: .\app_users\templates\app_users\templates_for_include\objects_list.html:15
+#: .\project_modules\templates\project_modules\base.html:63
+msgid "Profile photo"
+msgstr "Фото профиля"
+
+#: .\app_blog\templates\app_blog\blog_detail.html:87
+msgid "There are no comments yet, you can become the first"
+msgstr "Комментариев пока что нету, вы можете стать первым"
+
+#: .\app_blog\templates\app_blog\blog_detail.html:94
+msgid "Add a comment"
+msgstr "Добавить комментарий"
+
+#: .\app_blog\templates\app_blog\blog_detail.html:106
+msgid "Post a comment"
+msgstr "Опубликовать комментарий"
+
+#: .\app_blog\templates\app_blog\create_blog.html:7
+#: .\project_modules\templates\project_modules\base.html:48
+msgid "Create an entry"
+msgstr "Создать запись"
+
+#: .\app_blog\templates\app_blog\create_blog.html:16
+#: .\app_blog\templates\app_blog\update_blog.html:16
+msgid "Create a blog"
+msgstr "Создать блог"
+
+#: .\app_blog\templates\app_blog\create_blog.html:20
+msgid "Create entries from a file"
+msgstr "Создать записи из файла"
+
+#: .\app_blog\templates\app_blog\create_blog.html:27
+#: .\app_blog\templates\app_blog\create_blog_from_file.html:30
+msgid "Create"
+msgstr "Создать"
+
+#: .\app_blog\templates\app_blog\create_blog_from_file.html:7
+#: .\app_blog\templates\app_blog\create_blog_from_file.html:16
+msgid "Create an entry from a CSV file"
+msgstr "Создать запись из CSV файла"
+
+#: .\app_blog\templates\app_blog\create_blog_from_file.html:21
+msgid ""
+"The file must consist of two columns, the separator is ': '(colon), <br>\n"
+"                If the field contains a separator, it must be enclosed in "
+"'\"' (double quotes)<br>\n"
+"                The first column is the text of the blog<br>\n"
+"                The second column is the date of publication in the format "
+"(year(4 characters)- month(two characters) - number (two characters)T "
+"(Latin)hours (two characters):minutes(two characters)time zone(+- and 4 "
+"characters(HHMM))<br>\n"
+"                For example (Blog text: \"2020-01-01T01:01+0100\"). The file "
+"must be encoded in \"UTF-8\" or the blog text may be interpreted incorrectly."
+msgstr ""
+"Файл должен состоять из двух колонок, разделителем является ':' (двоеточие), "
+"<br>Если поле содержит разделитель, его необходимо заключить в '\"' (двойные "
+"кавычки)<br>Первая колонка - текст блога<br>Вторая колона - дата публикации "
+"в формате (год(4знака)-месяц(два знака)-число(два знака)T(латинская)часы(два "
+"знака):минуты(два знака)временная зона(+- и 4 знака(HHMM))<br>Например "
+"(Текст блога:\"2020-01-01T01:01+0100\"). Файл, должен быть в кодировке "
+"\"UTF-8\" или текст блога может неправильно интерпретироваться."
+
+#: .\app_blog\templates\app_blog\update_blog.html:20
+msgid "Delete an entry"
+msgstr "Удалить запись"
+
+#: .\app_blog\templates\app_blog\update_blog.html:24
+msgid "Edit"
+msgstr "Редактировать"
+
+#: .\app_blog\templates\app_blog\update_blog.html:28
+msgid "Already uploaded images"
+msgstr "Уже загруженные изображения"
+
+#: .\app_blog\templates\app_blog\user_blog_list.html:16
+msgid "List of blog entries"
+msgstr "Список записей блога"
+
+#: .\app_blog\templates\app_blog\user_blog_list.html:19
+msgid "entries"
+msgstr "записей"
+
+#: .\app_blog\templates\app_blog\user_blog_list.html:36
+msgid "No images uploaded"
+msgstr "Нет загруженных изображений"
+
+#: .\app_blog\templates\app_blog\user_blog_list.html:48
+#: .\app_users\templates\app_users\user_list.html:28
+msgid "There are no records that meet your request"
+msgstr "Нет записей удовлетворяющих вашему запросу"
+
+#: .\app_blog\tests\test_views.py:71 .\app_blog\tests\test_views.py:180
+#: .\app_blog\tests\test_views.py:300
+msgid "This field is required."
+msgstr "Это поле обязательное"
+
+#: .\app_users\admin.py:18
+msgid "Personal info"
+msgstr "Личная информация"
+
+#: .\app_users\admin.py:20
+msgid "Permissions"
+msgstr "Разрешения"
+
+#: .\app_users\admin.py:23
+msgid "Important dates"
+msgstr "Важные данные"
+
+#: .\app_users\apps.py:7
+msgid "user"
+msgstr "пользователь"
+
+#: .\app_users\forms.py:14
+msgid ""
+"Your password can’t be too similar to your other personal information.Your "
+"password must contain at least 8 characters.Your password can’t be a "
+"commonly used password.Your password can’t be entirely numeric."
+msgstr ""
+"Пароль не должен быть слишком похож на другую вашу личную информацию.Ваш "
+"пароль должен содержать как минимум 8 символов.Такой пароль часто "
+"используется.Пароль не может состоять только из цифр."
+
+#: .\app_users\forms.py:20
+msgid "Login"
+msgstr "Имя пользователя"
+
+#: .\app_users\forms.py:21
+msgid "Enter your username"
+msgstr "Введите ваше имя пользователя"
+
+#: .\app_users\forms.py:24
+msgid "The email address must contain \"@\""
+msgstr "E-mail адрес должен содержать \"@\""
+
+#: .\app_users\forms.py:26
+msgid "Enter your e-mail"
+msgstr "Введите ваш e-mail"
+
+#: .\app_users\forms.py:29 .\app_users\forms.py:32
+msgid "Enter your phone number"
+msgstr "Введите ваш номер телефона"
+
+#: .\app_users\forms.py:30
+msgid "Phone number"
+msgstr "Номер телефона"
+
+#: .\app_users\forms.py:36 .\app_users\forms.py:37 .\app_users\forms.py:38
+msgid "Enter your first name"
+msgstr "Введите ваше имя"
+
+#: .\app_users\forms.py:41 .\app_users\forms.py:42 .\app_users\forms.py:43
+msgid "Enter your surname"
+msgstr "Введите вашу фамилию"
+
+#: .\app_users\forms.py:46
+msgid "Select your photo"
+msgstr "Выберите фотографию"
+
+#: .\app_users\forms.py:52 .\app_users\forms.py:53 .\app_users\forms.py:112
+msgid "Enter password"
+msgstr "Введите пароль"
+
+#: .\app_users\forms.py:56 .\app_users\forms.py:57 .\app_users\forms.py:58
+#: .\app_users\forms.py:71 .\app_users\forms.py:72 .\app_users\forms.py:73
+msgid "Repeat the password"
+msgstr "Повторите пароль"
+
+#: .\app_users\forms.py:61 .\app_users\forms.py:62 .\app_users\forms.py:63
+msgid "Enter your old password"
+msgstr "Введите ваш старый пароль"
+
+#: .\app_users\forms.py:67 .\app_users\forms.py:68
+msgid "Enter new password"
+msgstr "Введите новый пароль"
+
+#: .\app_users\forms.py:104
+msgid "Enter username, e-mail or phone number"
+msgstr "Введите ваш ник, e-mail, или номер телефона"
+
+#: .\app_users\models.py:11 .\app_users\tests\test_models.py:30
+msgid "email address"
+msgstr "адрес электронной почты"
+
+#: .\app_users\models.py:12 .\app_users\tests\test_models.py:38
+msgid "telephone number"
+msgstr "телефонный номер"
+
+#: .\app_users\models.py:15 .\app_users\tests\test_models.py:46
+msgid "profile photo"
+msgstr "фото профиля"
+
+#: .\app_users\templates\app_users\custom_user_password_change.html:5
+#: .\app_users\templates\app_users\custom_user_password_change.html:10
+msgid "Changing the password"
+msgstr "Изменить пароль"
+
+#: .\app_users\templates\app_users\custom_user_password_change.html:15
+msgid "Change"
+msgstr "Изменить"
+
+#: .\app_users\templates\app_users\login.html:5
+#: .\app_users\templates\app_users\login.html:10
+#: .\project_modules\templates\project_modules\base.html:58
+msgid "Log in to the site"
+msgstr "Войти на сайт"
+
+#: .\app_users\templates\app_users\login.html:14
+msgid "Log in"
+msgstr "Войти"
+
+#: .\app_users\templates\app_users\personal_account.html:7
+#: .\app_users\templates\app_users\personal_account.html:18
+msgid "Personal account"
+msgstr "Личный кабинет"
+
+#: .\app_users\templates\app_users\personal_account.html:23
+msgid "The password was successfully changed"
+msgstr "Пароль успешно изменен"
+
+#: .\app_users\templates\app_users\personal_account.html:28
+msgid "Change password"
+msgstr "Поменять пароль"
+
+#: .\app_users\templates\app_users\personal_account.html:32
+msgid "Leave the site"
+msgstr "Покинуть сайт"
+
+#: .\app_users\templates\app_users\personal_account.html:36
+#: .\app_users\templates\app_users\templates_for_include\objects_list.html:8
+msgid "Blogger's posts"
+msgstr "Посты блогера"
+
+#: .\app_users\templates\app_users\personal_account.html:38
+msgid "My notes"
+msgstr "Мои записи"
+
+#: .\app_users\templates\app_users\personal_account.html:56
+msgid "Update"
+msgstr "Обновить"
+
+#: .\app_users\templates\app_users\personal_account.html:72
+msgid "Delete your page"
+msgstr "Удалить свою страницу"
+
+#: .\app_users\templates\app_users\register.html:6
+#: .\project_modules\templates\project_modules\base.html:40
+msgid "Registration"
+msgstr "Регистрация"
+
+#: .\app_users\templates\app_users\templates_for_include\custom_user_photo_link.html:3
+msgid "View in full size"
+msgstr "Посмотреть в полном размере"
+
+#: .\app_users\templates\app_users\user_list.html:7
+msgid "All bloggers"
+msgstr "Все блогеры"
+
+#: .\app_users\templates\app_users\user_list.html:17
+msgid "bloggers"
+msgstr "блогеров"
+
+#: .\app_users\tests\test_views.py:83
+#, python-format
+msgid ""
+"Please enter a correct %(username)s and password. Note that both fields may "
+"be case-sensitive."
+msgstr ""
+"Пожалуйста введите корректное %(username)s и пароль. Учтите, оба поля "
+"чувствительны к регистру."
+
+#: .\app_users\tests\test_views.py:85
+msgid "username"
+msgstr "имя пользователя"
+
+#: .\project_modules\templates\project_modules\base.html:33
+msgid "Main page"
+msgstr "Главная страница"
+
+#: .\project_modules\templates\project_modules\base.html:36
+msgid "Logo"
+msgstr "Логотип"
+
+#: .\project_modules\templates\project_modules\base.html:44
+msgid "Search for bloggers"
+msgstr "Поиск по блогерам"
+
+#: .\project_modules\templates\project_modules\base.html:55
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\project_modules\templates\project_modules\base.html:105
+msgid "Link to"
+msgstr "Ссылка на"
+
+#: .\project_modules\templates\project_modules\base.html:125
+msgid "Change language"
+msgstr "Поменять язык"
+
+#: .\project_modules\templates\project_modules\templates_for_include\object_paginator_links_list.html:33
+msgid "Previous"
+msgstr "Предыдущая"
+
+#: .\project_modules\templates\project_modules\templates_for_include\object_paginator_links_list.html:37
+msgid "Next"
+msgstr "Следующая"
+
+#: .\project_modules\templates\project_modules\templates_for_include\paginate_filter.html:3
+msgid "Show by"
+msgstr "Показывать по"

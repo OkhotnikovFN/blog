@@ -7,7 +7,7 @@ from app_users import models, forms
 
 @admin.register(models.CustomUser)
 class AdminCustomUser(UserAdmin):
-    """Регистрация раширенной модели пользователя в панели администрирования"""
+    """Регистрация расширенной модели пользователя в панели администрирования"""
 
     readonly_fields = ['slug']
     form = forms.AdminCustomUserChangeForm

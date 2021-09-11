@@ -1,4 +1,5 @@
 {% extends 'project_modules/base.html' %}
+{% load i18n %}
 
 {% load static %}
 
@@ -12,23 +13,24 @@
 
 {% block content %}
     <div class="title-container flex">
-        <h2 class="title-container__label">Создать блог</h2>
+        <h2 class="title-container__label">{% trans "Create a blog" %}</h2>
     </div>
     <form method="post" action="{% url 'app_blog:blog_delete' pk=blog.pk%}">
         {% csrf_token %}
-        <button class="update-button" type="submit">Удалить запись</button>
+        <button class="update-button" type="submit">{% trans "Delete an entry" %}</button>
     </form>
 
     {% url 'app_blog:blog_update' pk=blog.pk as update_url %}
-    {% include 'app_blog/templates_for_include/create_update_blog_form.html' with button_name='Редактировать' url=update_url %}
+    {% trans "Edit" as edit_trans %}
+    {% include 'app_blog/templates_for_include/create_update_blog_form.html' with button_name=edit_trans url=update_url %}
 
     <div class="title-container flex">
-        <h2 class="title-container__label title-container__label_small-font">Уже загруженные изображения</h2>
+        <h2 class="title-container__label title-container__label_small-font">{% trans "Already uploaded images" %}</h2>
     </div>
     <div class="existing-images flex">
         {% for image in blog.all_images %}
             <div class="existing-images__box">
-                <img class="upload-image" src="{{ image.image.url }}" alt="Изображение записи блога">
+                <img class="upload-image" src="{{ image.image.url }}" alt="{% trans "Blog image" %}">
                 <form method="post" action="{% url 'app_blog:blog_image_delete' pk=image.pk%}">
                     {% csrf_token %}
                     <button class="delete-uploaded-image transparent-button" type="submit">

@@ -21,7 +21,7 @@ class CreateBlogView(LoginRequiredMixin, generic.CreateView):
 
 
 class BlogDetailView(UserPassesTestMixin, generic.DetailView, generic.FormView):
-    """Представление детальрного просмотра записи блога"""
+    """Представление детального просмотра записи блога"""
     template_name = 'app_blog/blog_detail.html'
     queryset = models.Blog.objects.select_related('author').prefetch_related(
         Prefetch('images', queryset=models.BlogImage.objects.all(), to_attr='all_images'),

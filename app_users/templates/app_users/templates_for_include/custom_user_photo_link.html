@@ -1,3 +1,6 @@
-<a class="flex update-user-photo-link" href="{{ photo_url }}" target="_blank" aria-label="Посмотреть в полном размере" title="Посмотреть в полном размере">
-    <img class="update-user-photo-image" src="{{ photo_url }}" alt="Фотография профиля">
+{% load i18n %}
+
+{% trans "View in full size" as view_full_size_trans%}
+<a class="flex update-user-photo-link" href="{{ photo_url }}" target="_blank" aria-label="{{ view_full_size_trans }}" title="{{ view_full_size_trans }}">
+    <img class="update-user-photo-image" src="{{ photo_url }}" alt="{% trans "Profile photo" %}">
 </a>

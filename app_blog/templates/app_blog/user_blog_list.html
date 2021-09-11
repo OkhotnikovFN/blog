@@ -1,9 +1,10 @@
 {% extends 'project_modules/base.html' %}
+{% load i18n %}
 
 {% load static %}
 
 {% block title %}
-    Детальная информация о записи
+    {% trans  "Detailed information about the record" %}
 {%  endblock %}
 
 {% block head %}
@@ -12,10 +13,11 @@
 
 {% block content %}
     <div class="title-container flex">
-        <h2 class="title-container__label">Список записей блога</h2>
+        <h2 class="title-container__label">{% trans  "List of blog entries" %}</h2>
     </div>
 
-    {% include 'project_modules/templates_for_include/paginate_filter.html' with filter_name='blog_entries_per_page' object_name='записей'%}
+    {% trans 'entries' as records_trans%}
+    {% include 'project_modules/templates_for_include/paginate_filter.html' with filter_name='blog_entries_per_page' object_name=records_trans%}
 
     {% if blog_entries %}
         {% include 'project_modules/templates_for_include/object_paginator_links_list.html' %}
@@ -23,14 +25,15 @@
         <div class="blog-entries__container flex">
             {% for blog_entry in blog_entries %}
                 {% url 'app_blog:blog_detail' pk=blog_entry.pk  as blog_detail_url %}
-                <a class="update-link blog-entries__object flex" href="{{ blog_detail_url }}" aria-label="Запись {{ user.username }}" title="Запись {{ user.username }}">
+                {% trans 'Blog Entry' as entry_trans%}
+                <a class="update-link blog-entries__object flex" href="{{ blog_detail_url }}" aria-label="{{ entry_trans }} {{ user.username }}" title="{{ entry_trans }} {{ user.username }}">
                     <div class="round-wrap round-wrap_blog-image">
                         {% if blog_entry.all_images %}
                             {% with blog_entry.all_images|random as random_blog_image%}
-                                <img class="blog-entries__object-image" src="{{ random_blog_image.image.url }}" alt="Изображение блога">
+                                <img class="blog-entries__object-image" src="{{ random_blog_image.image.url }}" alt={% trans "Blog image" %}>
                             {% endwith %}
                         {% else %}
-                            Нет загруженных изображений
+                            {% trans "No images uploaded" %}
                         {% endif %}
                     </div>
                     <p class="blog-entries__object-text"> {{ blog_entry.display_text }} </p>
@@ -42,7 +45,7 @@
         {% include 'project_modules/templates_for_include/object_paginator_links_list.html' %}
     {% else %}
         <div class="title-container flex">
-            <h2 class="title-container__label">Нет записей удовлетворяющих вашему запросу</h2>
+            <h2 class="title-container__label">{% trans "There are no records that meet your request" %}</h2>
         </div>
     {% endif %}
 

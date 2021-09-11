@@ -6,6 +6,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from app_blog import models
 
@@ -40,7 +41,7 @@ class BlogModelTest(TestCase):
         """
         blog = models.Blog.objects.get(id=1)
         field_label = blog._meta.get_field('text').verbose_name
-        self.assertEquals(field_label, 'Текст блога')
+        self.assertEquals(field_label, _('Blog text'))
 
     def test_created_at_label(self):
         """
@@ -48,7 +49,7 @@ class BlogModelTest(TestCase):
         """
         blog = models.Blog.objects.get(id=1)
         field_label = blog._meta.get_field('created_at').verbose_name
-        self.assertEquals(field_label, 'Дата создания')
+        self.assertEquals(field_label, _('Created date'))
 
     def test_author_label(self):
         """
@@ -56,7 +57,7 @@ class BlogModelTest(TestCase):
         """
         blog = models.Blog.objects.get(id=1)
         field_label = blog._meta.get_field('author').verbose_name
-        self.assertEquals(field_label, 'Автор')
+        self.assertEquals(field_label, _('Author'))
 
     def test_published_at_label(self):
         """
@@ -64,7 +65,7 @@ class BlogModelTest(TestCase):
         """
         blog = models.Blog.objects.get(id=1)
         field_label = blog._meta.get_field('published_at').verbose_name
-        self.assertEquals(field_label, 'Дата публикации')
+        self.assertEquals(field_label, _('Published date'))
 
     def test_get_absolute_url(self):
         """
@@ -124,7 +125,7 @@ class BlogImageModelTest(TestCase):
         """
         blog_image = models.BlogImage.objects.get(id=1)
         field_label = blog_image._meta.get_field('image').verbose_name
-        self.assertEquals(field_label, 'Фото блога')
+        self.assertEquals(field_label, _('Blog image'))
 
     def test_created_at_label(self):
         """
@@ -132,7 +133,7 @@ class BlogImageModelTest(TestCase):
         """
         blog_image = models.BlogImage.objects.get(id=1)
         field_label = blog_image._meta.get_field('blog').verbose_name
-        self.assertEquals(field_label, 'Изображение блога')
+        self.assertEquals(field_label, _('Blog Entry'))
 
     def test_str_represent_name(self):
         """
@@ -178,7 +179,7 @@ class BlogCommentModelTest(TestCase):
         """
         blog_comment = models.BlogComment.objects.get(id=1)
         field_label = blog_comment._meta.get_field('user').verbose_name
-        self.assertEquals(field_label, 'Пользователь')
+        self.assertEquals(field_label, _('User'))
 
     def test_text_label(self):
         """
@@ -186,7 +187,7 @@ class BlogCommentModelTest(TestCase):
         """
         blog_comment = models.BlogComment.objects.get(id=1)
         field_label = blog_comment._meta.get_field('text').verbose_name
-        self.assertEquals(field_label, 'Комментарий')
+        self.assertEquals(field_label, _('Comment'))
 
     def test_blog_label(self):
         """
@@ -194,7 +195,7 @@ class BlogCommentModelTest(TestCase):
         """
         blog_comment = models.BlogComment.objects.get(id=1)
         field_label = blog_comment._meta.get_field('blog').verbose_name
-        self.assertEquals(field_label, 'Запись блога')
+        self.assertEquals(field_label, _('Blog Entry'))
 
     def test_short_str_represent_name(self):
         """

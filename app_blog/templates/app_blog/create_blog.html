@@ -1,9 +1,10 @@
 {% extends 'project_modules/base.html' %}
+{% load i18n %}
 
 {% load static %}
 
 {% block title %}
-    Создать запись
+    {% trans "Create an entry" %}
 {%  endblock %}
 
 {% block head %}
@@ -12,16 +13,18 @@
 
 {% block content %}
     <div class="title-container flex">
-        <h2 class="title-container__label">Создать блог</h2>
+        <h2 class="title-container__label">{% trans "Create a blog" %}</h2>
     </div>
 
     <div class="flex title-container">
-        <a class="update-link " href="{% url 'app_blog:blog_create_from_file' %}" aria-label="Создать записи из файла" title="Создать записи из файла">
-            Создать записи блога из файла
+        {% trans "Create entries from a file" as create_from_file_trans %}
+        <a class="update-link " href="{% url 'app_blog:blog_create_from_file' %}" aria-label="{{ create_from_file_trans }}" title="{{ create_from_file_trans }}">
+            {{ create_from_file_trans }}
         </a>
     </div>
 
     {% url 'app_blog:blog_create' as create_url%}
-    {% include 'app_blog/templates_for_include/create_update_blog_form.html' with button_name='Создать' url=create_url %}
+    {% trans "Create" as create_trans %}
+    {% include 'app_blog/templates_for_include/create_update_blog_form.html' with button_name=create_trans url=create_url %}
 
 {% endblock %}

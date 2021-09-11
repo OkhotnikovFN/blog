@@ -1,24 +1,25 @@
 from django import forms
 from django.core.validators import FileExtensionValidator
+from django.utils.translation import gettext_lazy as _
 
 from app_blog import models, widgets
 from project_modules.forms import ChangeIsValidFormMixin
 
 FIELDS_HELP_TEXT_AND_ATTRIBUTES = {
     'text': {
-        'help_text': 'Введите текст блога',
-        'attributes': {'placeholder': 'Текст блога',
-                       'aria-label': 'Введите текст блога', },
+        'help_text': _('Enter blog text'),
+        'attributes': {'placeholder': _('Blog text'),
+                       'aria-label': _('Enter blog text'), },
     },
     'published_at': {
-        'help_text': 'Введите дату публикации',
-        'attributes': {'placeholder': 'Дата публикации',
-                       'aria-label': 'Дата публикации', },
+        'help_text': _('Enter published date'),
+        'attributes': {'placeholder': _('Published date'),
+                       'aria-label': _('Published date'), },
     },
     'images': {
-        'help_text': 'Выберите изображения',
-        'attributes': {'placeholder': 'Выберите изображения',
-                       'aria-label': 'Выберите изображения',
+        'help_text': _('Select Images'),
+        'attributes': {'placeholder': _('Select Images'),
+                       'aria-label': _('Select Images'),
                        'multiple': True, },
     },
 }
@@ -29,7 +30,7 @@ FORM_CLASS_NAME = 'create-blog-form__field'
 class BlogForm(forms.ModelForm, ChangeIsValidFormMixin):
     """Форма создания блога"""
 
-    images = forms.ImageField(label='Изображения', required=False)
+    images = forms.ImageField(label=_('Images'), required=False)
 
     def __init__(self, *args, **kwargs):
         super(BlogForm, self).__init__(*args, **kwargs)
@@ -63,15 +64,15 @@ class BlogCommentForm(forms.ModelForm, ChangeIsValidFormMixin):
         widgets = {
             'text': forms.Textarea(attrs={
                 'class': FORM_CLASS_NAME,
-                'placeholder': 'Введите комментарий',
-                'aria-label': 'Введите комментарий',
+                'placeholder': _('Enter a comment'),
+                'aria-label': _('Enter a comment'),
             }),
         }
 
 
 class BlogEntriesFileForm(forms.Form, ChangeIsValidFormMixin):
     """Форма для создания записей блога, из CSV файла"""
-    csv_file = forms.FileField(label='CSV файл', validators=[FileExtensionValidator(allowed_extensions=['csv'])])
+    csv_file = forms.FileField(label=_('CSV file'), validators=[FileExtensionValidator(allowed_extensions=['csv'])])
     csv_file.widget.attrs.update({'class': FORM_CLASS_NAME})
 
     def clean_csv_file(self):

@@ -2,3 +2,15 @@
     background: $reverse-blue-gradient;
     padding: 15px;
 }
+
+.localization-wrap {
+    &__label {
+        font-size: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__select {
+        margin: 4px;
+    }
+}

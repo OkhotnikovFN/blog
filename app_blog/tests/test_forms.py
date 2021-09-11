@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.test import TestCase
+from django.utils.translation import gettext_lazy as _
 
 from app_blog import forms
 from app_blog.widgets import CustomDateTimeInput
@@ -81,7 +82,7 @@ class BlogEntriesFileFormTest(TestCase):
         Тестирование label у поля csv_file
         """
         form = forms.BlogEntriesFileForm()
-        self.assertEqual(form.fields['csv_file'].label, 'CSV файл')
+        self.assertEqual(form.fields['csv_file'].label, _('CSV file'))
 
     def test_valid_file_extension(self):
         """
@@ -95,7 +96,7 @@ class BlogEntriesFileFormTest(TestCase):
                                             'file',
                                             sys.getsizeof(image),
                                             None)
-            form = forms.BlogEntriesFileForm(files={'csv_file': form_img})
+            form = forms.BlogEntriesFileForm(data={'csv_file': form_img})
 
             self.assertFalse(form.is_valid())
 

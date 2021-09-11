@@ -10,6 +10,7 @@ urlpatterns = [
     path('bloger/', include('app_users.urls')),
     path('blog/', include('app_blog.urls')),
     path('admin/', admin.site.urls),
+    path('i18n', include('django.conf.urls.i18n')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

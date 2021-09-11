@@ -8,22 +8,22 @@ class CustomAuthBackend:
     auth_field = None
 
     def authenticate(self, request, username=None, password=None):
-        my_user_model = get_user_model()
+        User = get_user_model()
         filter_kwargs = {self.auth_field: username}
         try:
-            user = my_user_model.objects.get(**filter_kwargs)
+            user = User.objects.get(**filter_kwargs)
             if user.check_password(password):
                 return user
-        except my_user_model.DoesNotExist:
+        except User.DoesNotExist:
             return None
         except Exception:
             return None
 
     def get_user(self, user_id):
-        my_user_model = get_user_model()
+        User = get_user_model()
         try:
-            return my_user_model.objects.get(pk=user_id)
-        except my_user_model.DoesNotExist:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
             return None
 
 

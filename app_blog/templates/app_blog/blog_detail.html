@@ -1,9 +1,10 @@
 {% extends 'project_modules/base.html' %}
+{% load i18n %}
 
 {% load static %}
 
 {% block title %}
-    Детальная информация о записи
+    {% trans "Detailed information about the record" %}
 {%  endblock %}
 
 {% block head %}
@@ -12,19 +13,21 @@
 
 {% block content %}
     <div class="title-container flex">
-        <h2 class="title-container__label">Детальная информация о записи блога</h2>
+        <h2 class="title-container__label">{% trans "Detailed information about the record" %}</h2>
     </div>
     <div class="title-container flex">
-        <h2 class="title-container__label title-container__label_small-font">Содержание</h2>
+        <h2 class="title-container__label title-container__label_small-font">{% trans "Content" %}</h2>
     </div>
     <div class="title-container flex">
         {% if request.user == blog.author %}
-            <a class="update-link" href="{% url 'app_blog:blog_update' pk=blog.pk %}" aria-label="Редактировать запись" title="Редактировать запись">
-                Редактировать запись
+            {% trans "Edit an entry" as edit_entry_trans %}
+            <a class="update-link" href="{% url 'app_blog:blog_update' pk=blog.pk %}" aria-label={{ edit_entry_trans }} title={{ edit_entry_trans }}>
+                {{ edit_entry_trans }}
             </a>
         {% endif %}
-        <a class="update-link" href="{% url 'app_blog:user_blog_entries'  slug=blog.author.slug pk=blog.author.pk %}" aria-label="Все запсии пользователя {{ blog.author.username }}" title="Все запсии пользователя {{ blog.author.username }}">
-            Все записи пользователя
+        {% trans "All user entries" as all_user_entries_trans %}
+        <a class="update-link" href="{% url 'app_blog:user_blog_entries'  slug=blog.author.slug pk=blog.author.pk %}" aria-label="{{ all_user_entries_trans }} {{ blog.author.username }}" title="{{ all_user_entries_trans }} {{ blog.author.username }}">
+            {{ all_user_entries_trans }}
         </a>
     </div>
     <div class="blog-content__box flex">
@@ -33,20 +36,21 @@
             {% if blog.published_at %}
                 {{ blog.published_at|date:'d E Yг. H:i' }}
             {% else %}
-                Запись еще не опубликована
+                {% trans "The entry has not been published yet" %}
             {% endif %}
         </div>
     </div>
 
     {% if blog.all_images %}
         <div class="title-container flex">
-            <h2 class="title-container__label title-container__label_small-font">Изображения</h2>
+            <h2 class="title-container__label title-container__label_small-font">{% trans "Images" %}</h2>
         </div>
         <div class="blog-images">
             {% for image in blog.all_images %}
                 <div class="blog-images__item">
-                    <a class="blog-images__link" href="{{ image.image.url }}" target="_blank" aria-label="Изображение блога" title="Изображение блога">
-                        <img class="blog-images__image" src="{{ image.image.url }}" alt="Изображение блога" >
+                    {% trans "Blog image" as blog_image_trans %}
+                    <a class="blog-images__link" href="{{ image.image.url }}" target="_blank" aria-label="{{ blog_image_trans }}" title="{{ blog_image_trans }}">
+                        <img class="blog-images__image" src="{{ image.image.url }}" alt="{{ blog_image_trans }}" >
                     </a>
                 </div>
             {% endfor %}
@@ -56,7 +60,7 @@
     {% endif %}
 
     <div class="title-container flex">
-        <h2 class="title-container__label title-container__label_small-font">Комментарии</h2>
+        <h2 class="title-container__label title-container__label_small-font">{% trans "Comments" %}</h2>
     </div>
     <ul class="blog-comments">
         {% for comment in blog.all_comments %}
@@ -65,28 +69,29 @@
                     <div class="blog-comments__comment">
                         <div class="round-wrap round-wrap_icon">
                             {% if comment.user %}
-                                <img class="header__profile-photo" src="{{ comment.user.user_photo.url }}" alt="Фото профиля">
+                                {% trans "Profile photo" as profile_photo_trans%}
+                                <img class="header__profile-photo" src="{{ comment.user.user_photo.url }}" alt="{{ profile_photo_trans }}">
                             {% else %}
-                                <img class="header__profile-photo" src="{% static 'project_modules/images/anonymous-photo.jpg' %}" alt="Фото профиля">
+                                <img class="header__profile-photo" src="{% static 'project_modules/images/anonymous-photo.jpg' %}" alt="{{ profile_photo_trans }}">
                             {% endif %}
                         </div>
                         <p class="blog-comments__author-name">{{ comment }}</p>
                     </div>
 {##}
                     <p class="blog-comments__comment blog-comments__comment_text">{{ comment.text }}</p>
-                    <p class="blog-comments__comment blog-comments__comment_date">Дата публикации: {{ comment.created_at }}</p>
+                    <p class="blog-comments__comment blog-comments__comment_date">{% trans "Published date" %}: {{ comment.created_at }}</p>
                 </div>
             </li>
         {% empty %}
             <div class="comment-content">
-                <p class="comment-content__item">Комментариев пока что нету, вы можете стать первым</p>
+                <p class="comment-content__item">{% trans "There are no comments yet, you can become the first" %}</p>
             </div>
         {% endfor %}
     </ul>
 
 
     <div class="title-container flex">
-        <h2 class="title-container__label title-container__label_small-font">Добавить комментарий</h2>
+        <h2 class="title-container__label title-container__label_small-font">{% trans "Add a comment" %}</h2>
     </div>
     <form method="post" action="{% url 'app_blog:blog_detail' pk=blog.pk %}">
         {% csrf_token %}
@@ -98,8 +103,8 @@
             {{ form.text.errors }}
             {{ form.text }}
         </p>
-
-        <button class="update-button" type="submit" aria-label="Опубликовать комментарий" title="Опубликовать комментарий">Опубликовать комментарий</button>
+        {% trans "Post a comment" as post_comment_trans%}
+        <button class="update-button" type="submit" aria-label="{{ post_comment_trans }}" title="{{ post_comment_trans }}">{{ post_comment_trans }}</button>
     </form>
 
 {% endblock %}

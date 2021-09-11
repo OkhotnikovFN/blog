@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load app_users_templatetags %}
 
 {% if page_obj.has_other_pages %}
@@ -29,10 +30,12 @@
         </div>
         <div class="paginate-objects__container flex">
             {% if page_obj.has_previous %}
-                {% include 'project_modules/templates_for_include/single_link_in_objects_paginator.html' with p=page_obj.previous_page_number text='Предыдущая'%}
+                {% trans "Previous"  as previous_page_name %}
+                {% include 'project_modules/templates_for_include/single_link_in_objects_paginator.html' with p=page_obj.previous_page_number text=previous_page_name %}
             {% endif %}
             {% if page_obj.has_next %}
-                {% include 'project_modules/templates_for_include/single_link_in_objects_paginator.html' with p=page_obj.next_page_number text='Следующая'%}
+                {% trans "Next"  as next_page_name %}
+                {% include 'project_modules/templates_for_include/single_link_in_objects_paginator.html' with p=page_obj.next_page_number text=next_page_name %}
             {% endif %}
         </div>
     </div>

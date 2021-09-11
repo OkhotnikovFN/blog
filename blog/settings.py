@@ -1,11 +1,9 @@
-import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.urls import reverse_lazy
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR_OLD = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '07n+s+()02@kwl(*dxd+v^bl-en221cy)^6^4-siv3@z%0wx8$'
@@ -13,7 +11,7 @@ SECRET_KEY = '07n+s+()02@kwl(*dxd+v^bl-en221cy)^6^4-siv3@z%0wx8$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -26,13 +24,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'app_users',
-    'app_blog',
+    'app_users.apps.AppUsersConfig',
+    'app_blog.apps.AppBlogConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -42,7 +41,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'blog.urls'
 
-COMMON_TEMPLATE_DIR = os.path.join(BASE_DIR_OLD, 'project_modules', 'templates')
+COMMON_TEMPLATE_DIR = BASE_DIR / 'project_modules' / 'templates'
 
 TEMPLATES = [
     {
@@ -96,35 +95,35 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en'
+LANGUAGES = [
+    ('ru', 'Русский'),
+    ('en', 'English'),
+    ('de', 'Deutsche'),
+]
 
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
+LOCALE_PATHS = [BASE_DIR / 'project_modules' / 'locale']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR_OLD, 'project_modules', 'static'),
-)
+STATICFILES_DIRS = [
+    BASE_DIR / 'project_modules' / 'static'
+]
 
 # media settings
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 # User customisation
 AUTH_USER_MODEL = 'app_users.CustomUser'
-
 AUTHENTICATION_BACKENDS = (
     'app_users.backends.EmailBackend',
     'app_users.backends.TelephoneBackend',

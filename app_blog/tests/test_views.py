@@ -1,10 +1,9 @@
 import datetime
 import sys
-from io import BytesIO
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.core.files.uploadedfile import InMemoryUploadedFile, SimpleUploadedFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -82,16 +81,13 @@ class CreateBlogViewTest(TestCase):
         current_datetime = datetime.datetime.now()
         current_datetime_str = current_datetime.strftime('%Y-%m-%dT%H:%M')
 
-        img = BytesIO(
-                    b'GIF87a\x01\x00\x01\x00\x80\x01\x00\x00\x00\x00ccc,\x00'
-                    b'\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;')
-        image_file = SimpleUploadedFile('image.jpg', img.read(), 'image/jpg')
-
-        response_post = self.client.post(self.create_blog_url,
-                                         {'text': test_text,
-                                          'published_at': current_datetime_str,
-                                          'images': image_file},
-                                         follow=True)
+        with open(settings.BASE_DIR / 'project_modules/static/project_modules/images' / 'anonymous-photo.jpg',
+                  mode='rb') as image:
+            response_post = self.client.post(self.create_blog_url,
+                                             {'text': test_text,
+                                              'published_at': current_datetime_str,
+                                              'images': image},
+                                             follow=True)
         blog = models.Blog.objects.get(pk=1)
         uploaded_image_path = settings.BASE_DIR.joinpath(blog.images.all()[0].image.url.strip('/'))
 
@@ -598,7 +594,7 @@ class BlogCreateFromFileViewTest(TestCase):
 
     def test_post_create_blog_not_auth_user(self):
         """
-        Тестирование POST запроса не аутентифицированного пользователя
+        Тестирование POST запроса неаутентифицированного пользователя
         """
         response_post = self.client.post(self.blog_create_from_file, follow=True)
         self.assertRedirects(response_post, f'{self.auth_url}?next={self.blog_create_from_file}')
@@ -615,7 +611,7 @@ class BlogCreateFromFileViewTest(TestCase):
             response_post = self.client.post(self.blog_create_from_file, {'csv_file': csv_file})
 
         self.assertEqual(response_post.status_code, 200)
-        self.assertFormError(response_post, 'form', 'csv_file', 'Неверный формат даты в файле')
+        self.assertFormError(response_post, 'form', 'csv_file', _('Invalid date format in the file'))
         self.assertTemplateUsed(response_post, 'app_blog/create_blog_from_file.html')
         self.assertEqual(response_post.resolver_match.func.__name__, views.BlogCreateFromFileView.as_view().__name__)
 
@@ -624,9 +620,6 @@ class BlogCreateFromFileViewTest(TestCase):
         Тестирование POST запроса аутентифицированного пользователя, при вводе в форму корректных данных
         """
         self.client.login(username=self.username, password=self.user_password)
-
-        # file = SimpleUploadedFile('text.csv', b'Post Title,Post Body,2020-12-12,4')
-        # response = self.client.post(reverse('post_upload_url'), {'file': file})
 
         with open(settings.BASE_DIR / 'app_blog/tests' / 'csv_test.csv',
                   mode='rb') as csv_file:

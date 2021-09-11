@@ -4,68 +4,73 @@ from django.contrib.auth.password_validation import password_validators_help_tex
 from django.forms import ModelForm, TextInput, CharField, PasswordInput
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, UsernameField, \
     PasswordChangeForm
+from django.utils.translation import gettext_lazy as _
 
 from app_users import models
 from app_users.widgets import CustomClearableFileInput
 from project_modules.forms import ChangeIsValidFormMixin
 
+
+PASSWORD_HELP_TEXT = _("Your password can’t be too similar to your other personal information.Your password must "
+                       "contain at least 8 characters.Your password can’t be a commonly used password.Your password "
+                       "can’t be entirely numeric.")
 FIELDS_HELP_TEXT_AND_ATTRIBUTES = {
     'username': {
         'help_text': '',
-        'attributes': {'placeholder': 'Логин',
-                       'aria-label': 'Введите ваш логин', },
+        'attributes': {'placeholder': _('Login'),
+                       'aria-label': _('Enter your username'), },
     },
     'email': {
-        'help_text': 'Адрес электронной почты должен содержать "@"',
+        'help_text': _('The email address must contain "@"'),
         'attributes': {'placeholder': 'E-mail',
-                       'aria-label': 'Введите ваш e-mail', },
+                       'aria-label': _('Enter your e-mail'), },
     },
     'telephone_number': {
-        'help_text': 'Введите ваш номер телефона',
-        'attributes': {'placeholder': 'Номер телефона',
+        'help_text': _('Enter your phone number'),
+        'attributes': {'placeholder': _('Phone number'),
                        'type': 'tel',
-                       'aria-label': 'Введите ваш номер телефона',
+                       'aria-label': _('Enter your phone number'),
                        'data-tel-input': True, },
     },
     'first_name': {
-        'help_text': 'Введите ваше имя',
-        'attributes': {'placeholder': 'Введите имя',
-                       'aria-label': 'Введите имя', },
+        'help_text': _('Enter your first name'),
+        'attributes': {'placeholder': _('Enter your first name'),
+                       'aria-label': _('Enter your first name'), },
     },
     'last_name': {
-        'help_text': 'Введите вашу фамилию',
-        'attributes': {'placeholder': 'Введите фамилию',
-                       'aria-label': 'Введите фамилию', },
+        'help_text': _('Enter your surname'),
+        'attributes': {'placeholder': _('Enter your surname'),
+                       'aria-label': _('Enter your surname'), },
     },
     'user_photo': {
-        'help_text': 'Выберите вашу фотографию',
+        'help_text': _('Select your photo'),
         'attributes': {'placeholder': '',
                        'aria-label': '', },
     },
     'password1': {
-        'help_text': ''.join(password_validators_help_texts()),
-        'attributes': {'placeholder': 'Введите пароль',
-                       'aria-label': 'Введите пароль', },
+        'help_text': PASSWORD_HELP_TEXT,
+        'attributes': {'placeholder': _('Enter password'),
+                       'aria-label': _('Enter password'), },
     },
     'password2': {
-        'help_text': 'Повторите пароль',
-        'attributes': {'placeholder': 'Повторите пароль',
-                       'aria-label': 'Повторите пароль', },
+        'help_text': _('Repeat the password'),
+        'attributes': {'placeholder': _('Repeat the password'),
+                       'aria-label': _('Repeat the password'), },
     },
     'old_password': {
-        'help_text': 'Введите ваш старый пароль',
-        'attributes': {'placeholder': 'Введите старый пароль',
-                       'aria-label': 'Введите старый пароль', },
+        'help_text': _('Enter your old password'),
+        'attributes': {'placeholder': _('Enter your old password'),
+                       'aria-label': _('Enter your old password'), },
     },
     'new_password1': {
-        'help_text': ''.join(password_validators_help_texts()),
-        'attributes': {'placeholder': 'Введите новый пароль',
-                       'aria-label': 'Введите новый пароль', },
+        'help_text': PASSWORD_HELP_TEXT,
+        'attributes': {'placeholder': _('Enter new password'),
+                       'aria-label': _('Enter new password'), },
     },
     'new_password2': {
-        'help_text': 'Повторите пароль',
-        'attributes': {'placeholder': 'Повторите пароль',
-                       'aria-label': 'Повторите пароль', },
+        'help_text': _('Repeat the password'),
+        'attributes': {'placeholder': _('Repeat the password'),
+                       'aria-label': _('Repeat the password'), },
     },
 }
 
@@ -96,7 +101,7 @@ class AuthForm(AuthenticationForm, ChangeIsValidFormMixin):
     username = UsernameField(
         widget=TextInput(attrs={
             'autofocus': True,
-            'placeholder': 'Введите логин, e-mail или телефон',
+            'placeholder': _('Enter username, e-mail or phone number'),
             'class': LOGIN_REGISTER_UPDATE_FIELD_CLASS_NAME,
         }),
     )
@@ -104,7 +109,7 @@ class AuthForm(AuthenticationForm, ChangeIsValidFormMixin):
         strip=False,
         widget=PasswordInput(attrs={
             'autocomplete': 'current-password',
-            'placeholder': 'Введите пароль',
+            'placeholder': _('Enter password'),
             'class': LOGIN_REGISTER_UPDATE_FIELD_CLASS_NAME,
         }),
     )

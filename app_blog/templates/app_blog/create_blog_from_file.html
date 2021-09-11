@@ -1,9 +1,10 @@
 {% extends 'project_modules/base.html' %}
+{% load i18n %}
 
 {% load static %}
 
 {% block title %}
-    Создать запись из CSV файла
+    {% trans "Create an entry from a CSV file" %}
 {%  endblock %}
 
 {% block head %}
@@ -12,20 +13,21 @@
 
 {% block content %}
     <div class="title-container flex">
-        <h2 class="title-container__label">Создать блог из CSV файла</h2>
+        <h2 class="title-container__label">{% trans "Create an entry from a CSV file" %}</h2>
     </div>
 
     <div class="title-container flex">
         <h2 class="title-container__label title-container__label_small-font">
-            Файл должен сосотоять из двух колонок, разделителем является ':' (двоеточие), <br>
-            Если поле содержит разделитель, его необходимо заключить в '"' (двойные кавычки)<br>
-            Первая колонка - текст блога<br>
-            Вторая колона - дата публикации в формате (год(4знака)-месяц(два знака)-число(два знака)T(латинская)часы(два знака):минуты(два знака))<br>
-            Например (Текст блога:"2020-01-01T01:01"). Файл, должен быть в кодировке "UTF-8" или текст блога может неправильно интерпретироваться.
+                {% blocktrans %}The file must consist of two columns, the separator is ': '(colon), <br>
+                If the field contains a separator, it must be enclosed in '"' (double quotes)<br>
+                The first column is the text of the blog<br>
+                The second column is the date of publication in the format (year(4 characters)- month(two characters) - number (two characters)T (Latin)hours (two characters):minutes(two characters)time zone(+- and 4 characters(HHMM))<br>
+                For example (Blog text: "2020-01-01T01:01+0100"). The file must be encoded in "UTF-8" or the blog text may be interpreted incorrectly.{% endblocktrans %}
         </h2>
     </div>
 
     {% url 'app_blog:blog_create_from_file' as blog_create_from_file_url%}
-    {% include 'app_blog/templates_for_include/create_update_blog_form.html' with button_name='Создать' url=blog_create_from_file_url %}
+    {% trans "Create" as create_trans %}
+    {% include 'app_blog/templates_for_include/create_update_blog_form.html' with button_name=create_trans url=blog_create_from_file_url %}
 
 {% endblock %}

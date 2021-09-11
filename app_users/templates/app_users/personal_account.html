@@ -1,9 +1,10 @@
 {% extends 'project_modules/base.html' %}
+{% load i18n %}
 
 {% load static %}
 
 {% block title %}
-    Личный кабинет
+    {% trans "Personal account" %}
 {%  endblock %}
 
 {% block head %}
@@ -14,24 +15,27 @@
 
 {% block content %}
     <div class="title-container flex">
-        <h2 class="title-container__label">Личный кабинет</h2>
+        <h2 class="title-container__label">{% trans "Personal account" %}</h2>
     </div>
 
     {% if pass_successfully_changed %}
         <div class="title-container flex">
-            <h2 class="title-container__label">Пароль успешно изменен</h2>
+            <h2 class="title-container__label">{% trans "The password was successfully changed" %}</h2>
         </div>
     {% endif %}
 
     <div class="flex title-container">
-        <a class="update-link " href="{% url 'app_users:change_password' %}" aria-label="Поменять пароль" title="Поменять пароль">
-            Поменять пароль
+        {% trans "Change password" as change_password_trans%}
+        <a class="update-link " href="{% url 'app_users:change_password' %}" aria-label="{{ change_password_trans }}" title="{{ change_password_trans }}">
+            {{ change_password_trans }}
         </a>
-        <a class="update-link" href="{% url 'app_users:logout' %}" aria-label="Покинуть сайт" title="Покинуть сайт">
-            Покинуть сайт
+        {% trans "Leave the site" as leave_site_trans%}
+        <a class="update-link" href="{% url 'app_users:logout' %}" aria-label="{{ leave_site_trans }}" title="{{ leave_site_trans }}">
+            {{ leave_site_trans }}
         </a>
-        <a class="update-link" href="{% url 'app_blog:user_blog_entries' pk=customuser.pk slug=customuser.slug %}" aria-label="Посты блогера {{ customuser.username }}" title="Посты блогера {{ customuser.username }}">
-            Мои записи
+        {% trans "Blogger's posts" as blogger_posts_trans%}
+        <a class="update-link" href="{% url 'app_blog:user_blog_entries' pk=customuser.pk slug=customuser.slug %}" aria-label="{{ blogger_posts_trans }} {{ customuser.username }}" title="{{ blogger_posts_trans }} {{ customuser.username }}">
+            {% trans "My notes" %}
         </a>
     </div>
 
@@ -49,7 +53,7 @@
                         <div class="login-register-update__label flex">{{ form.user_photo.label_tag }}</div>
                         <div class="login-register-update__form-value flex">{{ form.user_photo }}</div>
                     </div>
-                <button class="update-button" type="submit"> Обновить </button>
+                <button class="update-button" type="submit"> {% trans "Update" %} </button>
             </form>
         </div>
 
@@ -65,7 +69,7 @@
 
     <form method="post" action="{% url 'app_users:delete' pk=customuser.pk slug=customuser.slug %}">
         {% csrf_token %}
-        <button class="update-button" type="submit"> Удалить свою страницу </button>
+        <button class="update-button" type="submit"> {% trans "Delete your page" %} </button>
     </form>
 
     <script type="module">

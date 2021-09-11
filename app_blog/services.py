@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.forms import FileField
 from django.http import HttpRequest
 from django.utils.timezone import localtime
+from django.utils.translation import gettext_lazy as _
 
 from app_blog import models, forms
 from app_blog.forms import BlogCommentForm, BlogEntriesFileForm
@@ -30,7 +31,7 @@ def create_update_blog(form: forms.BlogForm, request: HttpRequest) -> models.Blo
 
 def create_blog_comment(form: BlogCommentForm, request: HttpRequest, blog: Blog):
     """
-    Создание нового комметария к записи блога.
+    Создание нового комментария к записи блога.
     """
     new_comment = form.save(commit=False)
     new_comment.blog = blog
@@ -61,7 +62,7 @@ def check_csv_blog_file(form_data: FileField.clean) -> List:
     try:
         csv_file_str = csv_file_bytes.decode('utf8').split('\n')
     except UnicodeDecodeError:
-        raise ValidationError("Неверная кодировка файла")
+        raise ValidationError(_('Invalid file encoding'))
 
     csv_reader = csv.reader(csv_file_str, delimiter=':', quotechar='"')
     data_list = list(csv_reader)
@@ -70,6 +71,6 @@ def check_csv_blog_file(form_data: FileField.clean) -> List:
         try:
             csv_row[1] = localtime(datetime.datetime.strptime(csv_row[1], '%Y-%m-%dT%H:%M%z'))
         except ValueError:
-            raise ValidationError("Неверный формат даты в файле")
+            raise ValidationError(_('Invalid date format in the file'))
 
     return data_list
